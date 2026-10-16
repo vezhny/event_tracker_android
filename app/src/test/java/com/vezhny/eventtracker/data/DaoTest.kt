@@ -64,6 +64,20 @@ class DaoTest {
     }
 
     @Test
+    fun `last occurrence is the max record time, null if never`() = runTest {
+        val run = repository.saveEvent(Event(name = "Пробежка"))
+        val swim = repository.saveEvent(Event(name = "Бассейн"))
+        repository.record(run, at = 100)
+        repository.record(run, at = 300)
+        repository.record(run, at = 200)
+
+        val events = repository.observeEventsWithLast().first()
+        assertEquals(listOf("Бассейн", "Пробежка"), events.map { it.event.name })
+        assertEquals(listOf(null, 300L), events.map { it.lastOccurredAt })
+        assertEquals(listOf(swim, run), events.map { it.event.id })
+    }
+
+    @Test
     fun `deleting a record keeps the event and other records`() = runTest {
         val id = repository.saveEvent(Event(name = "Пробежка"))
         val first = repository.record(id, at = 100)

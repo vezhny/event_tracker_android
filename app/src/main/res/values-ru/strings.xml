@@ -32,6 +32,15 @@
     <string name="undo">Отменить</string>
     <string name="yes">Да</string>
     <string name="no">Нет</string>
+    <string name="last_never">Ещё не было</string>
+    <string name="last_today">Сегодня, %1$s</string>
+    <string name="last_yesterday">Вчера, %1$s</string>
+    <plurals name="last_days_ago">
+        <item quantity="one">%d день назад</item>
+        <item quantity="few">%d дня назад</item>
+        <item quantity="many">%d дней назад</item>
+        <item quantity="other">%d дня назад</item>
+    </plurals>
 
     <!-- Settings -->
     <string name="settings">Настройки</string>

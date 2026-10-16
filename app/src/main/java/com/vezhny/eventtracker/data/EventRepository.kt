@@ -9,6 +9,8 @@ class EventRepository(
 ) {
     fun observeEvents(): Flow<List<Event>> = eventDao.observeAll()
 
+    fun observeEventsWithLast(): Flow<List<EventWithLast>> = eventDao.observeAllWithLast()
+
     suspend fun getEvent(id: Long): Event? = eventDao.getById(id)
 
     /** Inserts a new event when [Event.id] is 0, otherwise updates it. */

@@ -34,6 +34,13 @@
     <string name="undo">Undo</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="last_never">Never</string>
+    <string name="last_today">Today, %1$s</string>
+    <string name="last_yesterday">Yesterday, %1$s</string>
+    <plurals name="last_days_ago">
+        <item quantity="one">%d day ago</item>
+        <item quantity="other">%d days ago</item>
+    </plurals>
 
     <!-- Settings -->
     <string name="settings">Settings</string>

@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vezhny.eventtracker.data.Event
 import com.vezhny.eventtracker.data.EventRepository
+import com.vezhny.eventtracker.data.EventWithLast
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -26,7 +27,7 @@ class HomeViewModel(private val repository: EventRepository) : ViewModel() {
     val state: StateFlow<HomeUiState> = _state.asStateFlow()
 
     /** null while loading. */
-    val events: StateFlow<List<Event>?> = repository.observeEvents()
+    val events: StateFlow<List<EventWithLast>?> = repository.observeEventsWithLast()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), null)
 
     fun select(event: Event) = _state.update { it.copy(confirming = event, justRecorded = null) }

@@ -23,6 +23,16 @@ interface EventDao {
 
     @Query("SELECT * FROM event ORDER BY name COLLATE NOCASE")
     fun observeAll(): Flow<List<Event>>
+
+    @Query(
+        """
+        SELECT event.*, MAX(event_record.occurredAt) AS lastOccurredAt
+        FROM event LEFT JOIN event_record ON event_record.eventId = event.id
+        GROUP BY event.id
+        ORDER BY event.name COLLATE NOCASE
+        """,
+    )
+    fun observeAllWithLast(): Flow<List<EventWithLast>>
 }
 
 @Dao

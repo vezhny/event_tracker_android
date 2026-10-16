@@ -1,5 +1,7 @@
 package com.vezhny.eventtracker.data
 
+import androidx.room.ColumnInfo
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
@@ -11,6 +13,12 @@ data class Event(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val name: String,
     val note: String? = null,
+)
+
+/** An event together with the moment it last happened (null if never). */
+data class EventWithLast(
+    @Embedded val event: Event,
+    @ColumnInfo(name = "lastOccurredAt") val lastOccurredAt: Long?,
 )
 
 /** One occurrence of an [Event]. */
