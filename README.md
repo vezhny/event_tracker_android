@@ -1,6 +1,13 @@
 # Event Tracker
 
-An Android app for tracking events.
+A small Android app for marking things that happened to you.
+
+## Features
+
+- **Home.** All your events as a grid of tiles. Tap a tile, confirm, and the event is recorded with the current time. A mistaken record can be undone from the snackbar.
+- **Events.** Add, edit, and delete events with a name and a note. Deleting asks for confirmation and also removes the event's records.
+- **Theme.** Light, dark, or system default.
+- **Language.** English or Russian, or the system default. Only the interface is translated: event names and notes stay as you typed them.
 
 ## Tech stack
 
@@ -21,13 +28,21 @@ SDK: `minSdk 26`, `targetSdk 37`. Build: Gradle 9.8 wrapper, AGP 9.4, version ca
 
 ```
 app/src/main/java/com/vezhny/eventtracker/
-├── data/        Repositories, settings, language
+├── data/        Room entities and DAOs, repository, settings, language
 ├── di/          Koin module
 └── ui/          Compose screens and ViewModels
-    ├── home/       Home screen
+    ├── home/       Tile grid and recording
+    ├── events/     Event list and edit form
     ├── settings/   Theme and language dialog
     └── theme/      Color schemes
 ```
+
+### Data model
+
+Two tables:
+
+- `event`: `id`, `name`, `note`.
+- `event_record`: `id`, `eventId`, `occurredAt` (epoch millis). Rows are deleted together with their event.
 
 ## Getting started
 
