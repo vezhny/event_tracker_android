@@ -3,8 +3,10 @@ package com.vezhny.eventtracker.data
 import android.app.Application
 import android.content.Context
 import androidx.room.Room
+import androidx.room.withTransaction
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.vezhny.eventtracker.domain.HistoryEntry
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.After
@@ -26,7 +28,7 @@ class DaoTest {
     fun setUp() {
         val context = ApplicationProvider.getApplicationContext<Context>()
         db = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).allowMainThreadQueries().build()
-        repository = EventRepository(db.eventDao(), db.eventRecordDao(), clock = { 500L })
+        repository = EventRepository(db.eventDao(), db.eventRecordDao(), RoomTransactor(db), clock = { 500L })
     }
 
     @After
@@ -100,5 +102,72 @@ class DaoTest {
 
         assertEquals(emptyList<EventRecord>(), repository.getRecords(run))
         assertEquals(1, repository.getRecords(swim).size)
+    }
+
+    @Test
+    fun `history is exported oldest first with event names`() = runTest {
+        val run = repository.saveEvent(Event(name = "Пробежка"))
+        val coffee = repository.saveEvent(Event(name = "Кофе"))
+        repository.record(coffee, at = 200)
+        repository.record(run, at = 100)
+
+        assertEquals(
+            listOf(HistoryEntry("Пробежка", 100), HistoryEntry("Кофе", 200)),
+            repository.getHistoryForExport(),
+        )
+    }
+
+    @Test
+    fun `import skips names that already exist or repeat, ignoring case`() = runTest {
+        repository.saveEvent(Event(name = "Кофе", note = "старая заметка"))
+
+        val result = repository.importData(
+            listOf(Event(id = 42, name = "кофе", note = "новая"), Event(name = "Пробежка"), Event(name = "ПРОБЕЖКА")),
+        )
+
+        assertEquals(ImportResult(eventsAdded = 1, eventsSkipped = 2), result)
+        val all = repository.getAllEvents()
+        assertEquals(listOf("Кофе", "Пробежка"), all.map { it.name })
+        assertEquals("старая заметка", all.first().note)
+    }
+
+    @Test
+    fun `import links history to existing and new events by name`() = runTest {
+        val coffee = repository.saveEvent(Event(name = "Кофе"))
+
+        val result = repository.importData(
+            events = listOf(Event(name = "Пробежка")),
+            history = listOf(HistoryEntry("КОФЕ", 100), HistoryEntry("Пробежка", 200), HistoryEntry("Бассейн", 300)),
+        )
+
+        assertEquals(ImportResult(eventsAdded = 1, eventsSkipped = 0, historyAdded = 2, historySkipped = 1), result)
+        assertEquals(listOf(100L), repository.getRecords(coffee).map { it.occurredAt })
+    }
+
+    @Test
+    fun `importing the same backup twice adds nothing the second time`() = runTest {
+        val coffee = repository.saveEvent(Event(name = "Кофе"))
+        repository.record(coffee, at = 100)
+
+        val result = repository.importData(repository.getAllEvents(), repository.getHistoryForExport())
+
+        assertEquals(ImportResult(eventsAdded = 0, eventsSkipped = 1, historyAdded = 0, historySkipped = 1), result)
+        assertEquals(1, repository.getRecords(coffee).size)
+    }
+
+    @Test
+    fun `failed import leaves the database untouched`() = runTest {
+        val failing = object : Transactor {
+            override suspend fun <R> inTransaction(block: suspend () -> R): R = db.withTransaction {
+                block()
+                error("disk full")
+            }
+        }
+        val repo = EventRepository(db.eventDao(), db.eventRecordDao(), failing)
+
+        runCatching { repo.importData(listOf(Event(name = "Кофе")), listOf(HistoryEntry("Кофе", 100))) }
+
+        assertEquals(emptyList<Event>(), repository.getAllEvents())
+        assertEquals(emptyList<HistoryEntry>(), repository.getHistoryForExport())
     }
 }

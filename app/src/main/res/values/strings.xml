@@ -17,6 +17,24 @@
     <!-- Events -->
     <string name="events_list_empty_title">Your event list is empty</string>
     <string name="events_list_empty_text">Add the events you want to track.</string>
+    <string name="more">More</string>
+    <string name="export_events">Export events</string>
+    <string name="export_everything">Export everything (with history)</string>
+    <string name="import_from_file">Import from file</string>
+    <plurals name="export_done">
+        <item quantity="one">Exported %d event</item>
+        <item quantity="other">Exported %d events</item>
+    </plurals>
+    <plurals name="import_added">
+        <item quantity="one">Added %d event</item>
+        <item quantity="other">Added %d events</item>
+    </plurals>
+    <string name="import_added_with_skipped">%1$s, already in the list: %2$d</string>
+    <string name="import_history_added">%1$s, records added: %2$d</string>
+    <string name="export_done_with_history">%1$s, records: %2$d</string>
+    <string name="export_failed">Couldn’t save the file</string>
+    <string name="import_read_failed">Couldn’t read the file</string>
+    <string name="import_invalid">This isn’t an Event Tracker file</string>
 
     <!-- Event edit -->
     <string name="event_new">New event</string>

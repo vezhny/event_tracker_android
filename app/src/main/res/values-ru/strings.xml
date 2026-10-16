@@ -15,6 +15,28 @@
     <!-- Events -->
     <string name="events_list_empty_title">Список событий пуст</string>
     <string name="events_list_empty_text">Добавьте события, которые хотите отмечать.</string>
+    <string name="more">Ещё</string>
+    <string name="export_events">Экспорт событий</string>
+    <string name="export_everything">Экспорт всего (с историей)</string>
+    <string name="import_from_file">Импорт из файла</string>
+    <plurals name="export_done">
+        <item quantity="one">Выгружено %d событие</item>
+        <item quantity="few">Выгружено %d события</item>
+        <item quantity="many">Выгружено %d событий</item>
+        <item quantity="other">Выгружено %d события</item>
+    </plurals>
+    <plurals name="import_added">
+        <item quantity="one">Добавлено %d событие</item>
+        <item quantity="few">Добавлено %d события</item>
+        <item quantity="many">Добавлено %d событий</item>
+        <item quantity="other">Добавлено %d события</item>
+    </plurals>
+    <string name="import_added_with_skipped">%1$s, уже были в списке: %2$d</string>
+    <string name="import_history_added">%1$s, добавлено записей: %2$d</string>
+    <string name="export_done_with_history">%1$s, записей: %2$d</string>
+    <string name="export_failed">Не удалось сохранить файл</string>
+    <string name="import_read_failed">Не удалось прочитать файл</string>
+    <string name="import_invalid">Это не файл Event Tracker</string>
 
     <!-- Event edit -->
     <string name="event_new">Новое событие</string>

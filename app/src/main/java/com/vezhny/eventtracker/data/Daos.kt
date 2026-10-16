@@ -24,6 +24,12 @@ interface EventDao {
     @Query("SELECT * FROM event ORDER BY name COLLATE NOCASE")
     fun observeAll(): Flow<List<Event>>
 
+    @Query("SELECT * FROM event ORDER BY name COLLATE NOCASE")
+    suspend fun getAll(): List<Event>
+
+    @Insert
+    suspend fun insertAll(events: List<Event>)
+
     @Query(
         """
         SELECT event.*, MAX(event_record.occurredAt) AS lastOccurredAt
@@ -39,6 +45,22 @@ interface EventDao {
 interface EventRecordDao {
     @Insert
     suspend fun insert(record: EventRecord): Long
+
+    @Insert
+    suspend fun insertAll(records: List<EventRecord>)
+
+    @Query("SELECT * FROM event_record")
+    suspend fun getAll(): List<EventRecord>
+
+    /** All records with event names, oldest first. */
+    @Query(
+        """
+        SELECT event.name AS eventName, event_record.occurredAt
+        FROM event_record JOIN event ON event.id = event_record.eventId
+        ORDER BY event_record.occurredAt
+        """,
+    )
+    suspend fun getHistory(): List<NamedRecord>
 
     @Query("DELETE FROM event_record WHERE id = :id")
     suspend fun deleteById(id: Long)

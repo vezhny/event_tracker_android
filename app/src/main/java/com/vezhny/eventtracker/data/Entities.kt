@@ -40,3 +40,6 @@ data class EventRecord(
     /** Epoch millis. */
     val occurredAt: Long,
 )
+
+/** A record joined with its event name. */
+data class NamedRecord(val eventName: String, val occurredAt: Long)
