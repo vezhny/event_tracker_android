@@ -9,8 +9,8 @@ A small Android app for marking things that happened to you.
 
 ## Features
 
-- **Home.** All your events as a grid of tiles, each showing when the event last happened ("Today, 14:30", "5 days ago", "Never"). Tap a tile, confirm, and the event is recorded with the current time. A mistaken record can be undone from the snackbar.
-- **Events.** Add, edit, and delete events with a name and a note. Deleting asks for confirmation and also removes the event's records.
+- **Home.** All your events as a grid of tiles with their icons, each showing when the event last happened ("Today, 14:30", "5 days ago", "Never"). Tap a tile, confirm, and the event is recorded with the current time. A mistaken record can be undone from the snackbar.
+- **Events.** Add, edit, and delete events with a name, a note, and an optional icon from a built-in set of 28. Deleting asks for confirmation and also removes the event's records.
 - **Statistics.** How many times each event happened over the last week, month, or year (each ending today), or over any range of days picked in a calendar. Events are listed most frequent first, with bars relative to the leader.
 - **Import / export.** Export either the event list or everything (events plus history) to a JSON file through the system file picker, and import it back on any device. Existing events and records are never duplicated.
 - **Theme.** Light, dark, or system default.
@@ -41,6 +41,7 @@ app/src/main/java/com/vezhny/eventtracker/
 └── ui/          Compose screens and ViewModels
     ├── home/       Tile grid and recording
     ├── events/     Event list and edit form, import/export
+    ├── icons/      Event icon set
     ├── stats/      Statistics by period
     ├── settings/   Theme and language dialog
     └── theme/      Color schemes
@@ -50,7 +51,7 @@ app/src/main/java/com/vezhny/eventtracker/
 
 Two tables:
 
-- `event`: `id`, `name`, `note`.
+- `event`: `id`, `name`, `note`, `icon` (a stable key such as `coffee`, null for no icon; added in database version 2 by a Room auto-migration).
 - `event_record`: `id`, `eventId`, `occurredAt` (epoch millis). Rows are deleted together with their event.
 
 ## Getting started

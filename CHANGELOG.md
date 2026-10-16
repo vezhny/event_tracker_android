@@ -15,3 +15,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Each tile shows when the event last happened.
 - Export of events, or events with history, to JSON; import merges without duplicates.
 - Statistics tab: counts per event for the last week, month, year, or a custom range of days.
+- Event icons: 28 to choose from in the event form (or none), shown on tiles, in the event list, and in statistics, and included in export files.
