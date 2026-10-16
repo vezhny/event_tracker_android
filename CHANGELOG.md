@@ -12,3 +12,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Events: add, edit, and delete (with confirmation) on the Events tab.
 - Home: events as a tile grid. Tap, confirm, and the event is recorded now; the snackbar offers undo.
 - Room database with `event` and `event_record` tables.
+- Each tile shows when the event last happened.
+- Export of events, or events with history, to JSON; import merges without duplicates.
+- Statistics tab: counts per event for the last week, month, year, or a custom range of days.

@@ -1,11 +1,14 @@
+| Serialization | kotlinx.serialization JSON (import/export) |
 # Event Tracker
 
 A small Android app for marking things that happened to you.
 
 ## Features
 
-- **Home.** All your events as a grid of tiles. Tap a tile, confirm, and the event is recorded with the current time. A mistaken record can be undone from the snackbar.
+- **Home.** All your events as a grid of tiles, each showing when the event last happened ("Today, 14:30", "5 days ago", "Never"). Tap a tile, confirm, and the event is recorded with the current time. A mistaken record can be undone from the snackbar.
 - **Events.** Add, edit, and delete events with a name and a note. Deleting asks for confirmation and also removes the event's records.
+- **Statistics.** How many times each event happened over the last week, month, or year (each ending today), or over any range of days picked in a calendar. Events are listed most frequent first, with bars relative to the leader.
+- **Import / export.** Export either the event list or everything (events plus history) to a JSON file through the system file picker, and import it back on any device. Existing events and records are never duplicated.
 - **Theme.** Light, dark, or system default.
 - **Language.** English or Russian, or the system default. Only the interface is translated: event names and notes stay as you typed them.
 
@@ -28,11 +31,13 @@ SDK: `minSdk 26`, `targetSdk 37`. Build: Gradle 9.8 wrapper, AGP 9.4, version ca
 
 ```
 app/src/main/java/com/vezhny/eventtracker/
-├── data/        Room entities and DAOs, repository, settings, language
+├── data/        Room entities and DAOs, repository, settings, language, file I/O
+├── domain/      Pure logic: JSON import/export, statistics periods
 ├── di/          Koin module
 └── ui/          Compose screens and ViewModels
     ├── home/       Tile grid and recording
-    ├── events/     Event list and edit form
+    ├── events/     Event list and edit form, import/export
+    ├── stats/      Statistics by period
     ├── settings/   Theme and language dialog
     └── theme/      Color schemes
 ```
@@ -72,6 +77,35 @@ The app follows [Semantic Versioning](https://semver.org/). The version lives in
 - `versionCode` is derived from it as `MAJOR * 10000 + MINOR * 100 + PATCH` (`0.1.0` → `100`). MINOR and PATCH must stay within 0–99.
 
 To release: bump `appVersion`, move the `[Unreleased]` notes in [`CHANGELOG.md`](CHANGELOG.md) under the new version, merge, and tag the merge commit (`v0.1.0`).
+
+## Import / export format
+
+There are two kinds of export, both in the same format:
+
+- **Events**: only the event list (`event-tracker-events-<date>.json`).
+- **Everything**: events plus the whole history (`event-tracker-events-and-history-<date>.json`).
+
+```json
+{
+  "version": 1,
+  "events": [
+    { "name": "Running", "note": "5 km in the park" },
+    { "name": "Coffee" }
+  ],
+  "history": [
+    { "event": "Running", "occurredAt": "2026-10-16T06:49:51.684Z" }
+  ]
+}
+```
+
+- `history` is present only in a full export. Entries reference events by name, so the file is portable between devices. `occurredAt` is an ISO-8601 instant in UTC.
+- `note` is optional, and unknown fields are ignored. Events with a blank name are skipped.
+- Files with a newer `version` than the app supports are rejected.
+
+Import loads everything the file contains, in a single transaction:
+
+- An event is skipped if an event with the same name already exists, ignoring case. The existing event is kept as is.
+- A history entry is linked to an event by name, either an existing event or one imported from the same file. It is skipped if that event already has a record at the same moment, so importing the same backup twice adds nothing. It is also skipped if no event has that name.
 
 ## Localization
 
