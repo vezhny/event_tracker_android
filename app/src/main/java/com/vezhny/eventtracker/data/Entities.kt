@@ -13,6 +13,8 @@ data class Event(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val name: String,
     val note: String? = null,
+    /** [com.vezhny.eventtracker.ui.icons.EventIcon.key], or null for no icon. */
+    val icon: String? = null,
 )
 
 /** An event together with the moment it last happened (null if never). */

@@ -47,6 +47,18 @@ class DaoTest {
     }
 
     @Test
+    fun `icon is saved, changed and removed`() = runTest {
+        val id = repository.saveEvent(Event(name = "Кофе", icon = "coffee"))
+        assertEquals("coffee", repository.getEvent(id)?.icon)
+
+        repository.saveEvent(Event(id = id, name = "Кофе", icon = "water"))
+        assertEquals("water", repository.getEvent(id)?.icon)
+
+        repository.saveEvent(Event(id = id, name = "Кофе"))
+        assertNull(repository.getEvent(id)?.icon)
+    }
+
+    @Test
     fun `events are sorted by name ignoring case`() = runTest {
         repository.saveEvent(Event(name = "b"))
         repository.saveEvent(Event(name = "A"))
