@@ -42,6 +42,7 @@
     <string name="event_edit">Event</string>
     <string name="event_name">Name</string>
     <string name="event_note">Note</string>
+    <string name="event_icon">Icon</string>
     <string name="delete_event_title">Delete event?</string>
     <string name="delete_event_text">“%1$s” and all its records will be deleted.</string>
 
@@ -72,6 +73,7 @@
     <string name="stats_empty_text">Add events and mark them on the home screen to see how often they happen.</string>
 
     <!-- Event icons -->
+    <string name="icon_none">No icon</string>
     <string name="icon_coffee">Coffee</string>
     <string name="icon_food">Food</string>
     <string name="icon_water">Water</string>

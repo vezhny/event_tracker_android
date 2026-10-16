@@ -44,6 +44,7 @@
     <string name="event_edit">Событие</string>
     <string name="event_name">Название</string>
     <string name="event_note">Заметка</string>
+    <string name="event_icon">Иконка</string>
     <string name="delete_event_title">Удалить событие?</string>
     <string name="delete_event_text">«%1$s» и все его записи будут удалены.</string>
 
@@ -75,6 +76,7 @@
     <string name="stats_empty_text">Добавьте события и отмечайте их на главной, чтобы видеть, как часто они происходят.</string>
 
     <!-- Event icons -->
+    <string name="icon_none">Без иконки</string>
     <string name="icon_coffee">Кофе</string>
     <string name="icon_food">Еда</string>
     <string name="icon_water">Вода</string>
