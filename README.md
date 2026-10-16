@@ -72,7 +72,7 @@ Requirements: Android Studio (or JDK 17+ and the Android SDK with platform 37).
 
 ## Continuous integration
 
-[GitHub Actions](.github/workflows/android.yml) runs `./gradlew lint test assembleDebug` on every push and pull request. Lint and test reports are uploaded as build artifacts.
+[GitHub Actions](.github/workflows/android.yml) runs `./gradlew lint test assembleDebug` on every pull request. Lint and test reports are uploaded as build artifacts.
 
 ## Versioning
 
