@@ -17,6 +17,12 @@ import java.time.temporal.ChronoUnit
 private fun Long.atLocalZone(zone: ZoneId = ZoneId.systemDefault()): ZonedDateTime =
     Instant.ofEpochMilli(this).atZone(zone)
 
+/** A date in the UI language, e.g. "16 Oct 2026". */
+@Composable
+@ReadOnlyComposable
+fun formatDate(date: LocalDate): String =
+    date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(LocalLocale.current.platformLocale))
+
 /** "Today, 14:30", "Yesterday, 09:10", "5 days ago" or "Never". */
 @Composable
 @ReadOnlyComposable

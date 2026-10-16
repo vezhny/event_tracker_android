@@ -2,6 +2,7 @@
     <!-- Navigation -->
     <string name="nav_home">Главная</string>
     <string name="nav_events">События</string>
+    <string name="nav_stats">Статистика</string>
 
     <!-- Common -->
     <string name="done">Готово</string>
@@ -63,6 +64,15 @@
         <item quantity="many">%d дней назад</item>
         <item quantity="other">%d дня назад</item>
     </plurals>
+
+    <!-- Statistics -->
+    <string name="period_week">Неделя</string>
+    <string name="period_month">Месяц</string>
+    <string name="period_year">Год</string>
+    <string name="period_custom">Период…</string>
+    <string name="stats_total">Всего: %1$d</string>
+    <string name="stats_empty_title">Статистики пока нет</string>
+    <string name="stats_empty_text">Добавьте события и отмечайте их на главной, чтобы видеть, как часто они происходят.</string>
 
     <!-- Settings -->
     <string name="settings">Настройки</string>

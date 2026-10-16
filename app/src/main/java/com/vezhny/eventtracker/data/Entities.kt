@@ -21,6 +21,12 @@ data class EventWithLast(
     @ColumnInfo(name = "lastOccurredAt") val lastOccurredAt: Long?,
 )
 
+/** An event with the number of times it happened in some period. */
+data class EventCount(
+    @Embedded val event: Event,
+    @ColumnInfo(name = "count") val count: Int,
+)
+
 /** One occurrence of an [Event]. */
 @Entity(
     tableName = "event_record",

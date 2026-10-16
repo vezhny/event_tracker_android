@@ -26,11 +26,14 @@ import com.vezhny.eventtracker.R
 import com.vezhny.eventtracker.ui.events.EventEditScreen
 import com.vezhny.eventtracker.ui.events.EventsScreen
 import com.vezhny.eventtracker.ui.home.HomeScreen
+import com.vezhny.eventtracker.ui.stats.StatsIcon
+import com.vezhny.eventtracker.ui.stats.StatsScreen
 import kotlinx.serialization.Serializable
 import kotlin.reflect.KClass
 
 @Serializable object HomeRoute
 @Serializable object EventsRoute
+@Serializable object StatsRoute
 @Serializable data class EventEditRoute(val eventId: Long = 0)
 
 private data class TopLevelDestination(
@@ -44,6 +47,7 @@ private data class TopLevelDestination(
 private val topLevelDestinations = listOf(
     TopLevelDestination(HomeRoute, HomeRoute::class, R.string.nav_home, Icons.Filled.Home),
     TopLevelDestination(EventsRoute, EventsRoute::class, R.string.nav_events, Icons.Filled.List),
+    TopLevelDestination(StatsRoute, StatsRoute::class, R.string.nav_stats, StatsIcon),
 )
 
 @Composable
@@ -86,6 +90,7 @@ fun EventTrackerApp() {
             composable<EventsRoute> {
                 EventsScreen(onEditEvent = { id -> navController.navigate(EventEditRoute(id)) })
             }
+            composable<StatsRoute> { StatsScreen() }
             composable<EventEditRoute> { entry ->
                 EventEditScreen(
                     eventId = entry.toRoute<EventEditRoute>().eventId,

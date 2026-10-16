@@ -39,6 +39,18 @@ interface EventDao {
         """,
     )
     fun observeAllWithLast(): Flow<List<EventWithLast>>
+
+    /** Every event with the number of its records in [from, to), most frequent first. */
+    @Query(
+        """
+        SELECT event.*, COUNT(event_record.id) AS count
+        FROM event LEFT JOIN event_record
+            ON event_record.eventId = event.id AND event_record.occurredAt >= :from AND event_record.occurredAt < :to
+        GROUP BY event.id
+        ORDER BY count DESC, event.name COLLATE NOCASE
+        """,
+    )
+    fun observeCounts(from: Long, to: Long): Flow<List<EventCount>>
 }
 
 @Dao

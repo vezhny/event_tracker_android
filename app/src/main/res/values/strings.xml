@@ -4,6 +4,7 @@
     <!-- Navigation -->
     <string name="nav_home">Home</string>
     <string name="nav_events">Events</string>
+    <string name="nav_stats">Statistics</string>
 
     <!-- Common -->
     <string name="done">Done</string>
@@ -59,6 +60,16 @@
         <item quantity="one">%d day ago</item>
         <item quantity="other">%d days ago</item>
     </plurals>
+
+    <!-- Statistics -->
+    <string name="period_week">Week</string>
+    <string name="period_month">Month</string>
+    <string name="period_year">Year</string>
+    <string name="period_custom">Period…</string>
+    <string name="stats_range" translatable="false">%1$s – %2$s</string>
+    <string name="stats_total">Total: %1$d</string>
+    <string name="stats_empty_title">No statistics yet</string>
+    <string name="stats_empty_text">Add events and mark them on the home screen to see how often they happen.</string>
 
     <!-- Settings -->
     <string name="settings">Settings</string>

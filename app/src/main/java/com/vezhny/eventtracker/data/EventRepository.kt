@@ -20,6 +20,9 @@ class EventRepository(
 
     fun observeEventsWithLast(): Flow<List<EventWithLast>> = eventDao.observeAllWithLast()
 
+    /** Counts of records per event in [from, to) epoch millis. */
+    fun observeCounts(from: Long, to: Long): Flow<List<EventCount>> = eventDao.observeCounts(from, to)
+
     suspend fun getEvent(id: Long): Event? = eventDao.getById(id)
 
     /** Inserts a new event when [Event.id] is 0, otherwise updates it. */

@@ -105,6 +105,22 @@ class DaoTest {
     }
 
     @Test
+    fun `counts include only records in the half-open range and list every event`() = runTest {
+        val run = repository.saveEvent(Event(name = "Пробежка"))
+        val coffee = repository.saveEvent(Event(name = "Кофе"))
+        repository.saveEvent(Event(name = "Бассейн"))
+        listOf(99L, 100, 150, 199, 200).forEach { repository.record(coffee, at = it) }
+        repository.record(run, at = 120)
+
+        val counts = repository.observeCounts(from = 100, to = 200).first()
+
+        assertEquals(
+            listOf("Кофе" to 3, "Пробежка" to 1, "Бассейн" to 0),
+            counts.map { it.event.name to it.count },
+        )
+    }
+
+    @Test
     fun `history is exported oldest first with event names`() = runTest {
         val run = repository.saveEvent(Event(name = "Пробежка"))
         val coffee = repository.saveEvent(Event(name = "Кофе"))
