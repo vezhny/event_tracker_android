@@ -1,0 +1,7 @@
+<resources>
+    <!-- AppCompat theme: required by AppCompatActivity for the in-app language switch. -->
+    <style name="Theme.EventTracker" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Matches the Compose background so there is no flash before the first frame. -->
+        <item name="android:windowBackground">@color/window_background</item>
+    </style>
+</resources>

@@ -1,0 +1,17 @@
+<resources>
+    <!-- Common -->
+    <string name="done">Готово</string>
+
+    <!-- Home -->
+    <string name="events_empty_title">Событий пока нет</string>
+    <string name="events_empty_text">Здесь появятся события, которые вы отслеживаете.</string>
+
+    <!-- Settings -->
+    <string name="settings">Настройки</string>
+    <string name="theme">Тема</string>
+    <string name="theme_system">Как в системе</string>
+    <string name="theme_light">Светлая</string>
+    <string name="theme_dark">Тёмная</string>
+    <string name="language">Язык</string>
+    <string name="language_system">Как в системе</string>
+</resources>

@@ -1,0 +1,5 @@
+<resources>
+    <color name="ic_launcher_background">#FF006A6A</color>
+    <!-- Same as the Compose color scheme background (see ui/theme/Theme.kt). -->
+    <color name="window_background">#FFF4FBFA</color>
+</resources>

@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name" translatable="false">Event Tracker</string>
+
+    <!-- Common -->
+    <string name="done">Done</string>
+
+    <!-- Home -->
+    <string name="events_empty_title">No events yet</string>
+    <string name="events_empty_text">Events you track will show up here.</string>
+
+    <!-- Settings -->
+    <string name="settings">Settings</string>
+    <string name="theme">Theme</string>
+    <string name="theme_system">System default</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="language">Language</string>
+    <string name="language_system">System default</string>
+    <string name="version" translatable="false">Event Tracker %1$s</string>
+    <!-- Language names are shown in their own language. -->
+    <string name="language_english" translatable="false">English</string>
+    <string name="language_russian" translatable="false">Русский</string>
+</resources>
