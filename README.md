@@ -3,6 +3,10 @@
 
 A small Android app for marking things that happened to you.
 
+<p align="center">
+  <img src="app/src/main/ic_launcher-playstore.png" width="160" alt="Event Tracker icon">
+</p>
+
 ## Features
 
 - **Home.** All your events as a grid of tiles, each showing when the event last happened ("Today, 14:30", "5 days ago", "Never"). Tap a tile, confirm, and the event is recorded with the current time. A mistaken record can be undone from the snackbar.

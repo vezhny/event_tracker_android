@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
-// Placeholder palette (teal). Replace with the brand colors once the app icon is drawn.
+// Teal palette matching the launcher icon.
 
 private val LightColors = lightColorScheme(
     primary = Color(0xFF006A6A),
