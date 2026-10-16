@@ -17,10 +17,10 @@ data class TransferData(val events: List<Event>, val history: List<HistoryEntry>
  * JSON format for exporting and importing data:
  * ```
  * {"version": 1,
- *  "events": [{"name": "Пробежка", "note": "..."}],
+ *  "events": [{"name": "Пробежка", "note": "...", "icon": "run"}],
  *  "history": [{"event": "Пробежка", "occurredAt": "2026-10-16T07:30:00Z"}]}
  * ```
- * `history` is present only in full exports.
+ * `history` is present only in full exports. `note` and `icon` are optional.
  */
 object EventTransfer {
     const val VERSION = 1
@@ -33,7 +33,7 @@ object EventTransfer {
     )
 
     @Serializable
-    private data class EventDto(val name: String, val note: String? = null)
+    private data class EventDto(val name: String, val note: String? = null, val icon: String? = null)
 
     @Serializable
     private data class HistoryDto(val event: String, val occurredAt: String)
@@ -49,7 +49,7 @@ object EventTransfer {
         FileDto.serializer(),
         FileDto(
             version = VERSION,
-            events = events.map { EventDto(it.name, it.note) },
+            events = events.map { EventDto(it.name, it.note, it.icon) },
             history = history?.map { HistoryDto(it.eventName, Instant.ofEpochMilli(it.occurredAt).toString()) },
         ),
     )
@@ -68,7 +68,10 @@ object EventTransfer {
         require(file.version <= VERSION) { "Unsupported version ${file.version}" }
         val events = file.events
             .filter { it.name.isNotBlank() }
-            .map { Event(name = it.name.trim(), note = it.note?.trim()?.ifEmpty { null }) }
+            .map {
+                // An icon key this version doesn't know is kept: the event just shows no icon until an update adds it.
+                Event(name = it.name.trim(), note = it.note?.trim()?.ifEmpty { null }, icon = it.icon?.trim()?.ifEmpty { null })
+            }
         val history = file.history
             ?.filter { it.event.isNotBlank() }
             ?.map { HistoryEntry(it.event.trim(), parseInstant(it.occurredAt)) }

@@ -93,7 +93,7 @@ There are two kinds of export, both in the same format:
 {
   "version": 1,
   "events": [
-    { "name": "Running", "note": "5 km in the park" },
+    { "name": "Running", "note": "5 km in the park", "icon": "run" },
     { "name": "Coffee" }
   ],
   "history": [
@@ -103,7 +103,7 @@ There are two kinds of export, both in the same format:
 ```
 
 - `history` is present only in a full export. Entries reference events by name, so the file is portable between devices. `occurredAt` is an ISO-8601 instant in UTC.
-- `note` is optional, and unknown fields are ignored. Events with a blank name are skipped.
+- `note` and `icon` are optional, and unknown fields are ignored. `icon` is a stable icon key such as `coffee` or `run`; a key the app doesn't know is kept, and the event shows no icon. Events with a blank name are skipped.
 - Files with a newer `version` than the app supports are rejected.
 
 Import loads everything the file contains, in a single transaction:
