@@ -44,6 +44,7 @@
     <string name="event_edit">Событие</string>
     <string name="event_name">Название</string>
     <string name="event_note">Заметка</string>
+    <string name="event_icon">Иконка</string>
     <string name="delete_event_title">Удалить событие?</string>
     <string name="delete_event_text">«%1$s» и все его записи будут удалены.</string>
 
@@ -73,6 +74,37 @@
     <string name="stats_total">Всего: %1$d</string>
     <string name="stats_empty_title">Статистики пока нет</string>
     <string name="stats_empty_text">Добавьте события и отмечайте их на главной, чтобы видеть, как часто они происходят.</string>
+
+    <!-- Event icons -->
+    <string name="icon_none">Без иконки</string>
+    <string name="icon_coffee">Кофе</string>
+    <string name="icon_food">Еда</string>
+    <string name="icon_water">Вода</string>
+    <string name="icon_alcohol">Алкоголь</string>
+    <string name="icon_smoking">Курение</string>
+    <string name="icon_run">Бег</string>
+    <string name="icon_gym">Спортзал</string>
+    <string name="icon_sleep">Сон</string>
+    <string name="icon_health">Здоровье</string>
+    <string name="icon_heart">Сердце</string>
+    <string name="icon_celebration">Праздник</string>
+    <string name="icon_shopping">Покупки</string>
+    <string name="icon_money">Деньги</string>
+    <string name="icon_work">Работа</string>
+    <string name="icon_home">Дом</string>
+    <string name="icon_car">Машина</string>
+    <string name="icon_fuel">Заправка</string>
+    <string name="icon_flight">Перелёт</string>
+    <string name="icon_haircut">Стрижка</string>
+    <string name="icon_stress">Стресс</string>
+    <string name="icon_toilet">Туалет</string>
+    <string name="icon_computer">Компьютер</string>
+    <string name="icon_games">Игры</string>
+    <string name="icon_star">Звезда</string>
+    <string name="icon_check">Галочка</string>
+    <string name="icon_flag">Флаг</string>
+    <string name="icon_bolt">Молния</string>
+    <string name="icon_bell">Колокольчик</string>
 
     <!-- Settings -->
     <string name="settings">Настройки</string>

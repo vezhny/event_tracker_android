@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -49,6 +50,7 @@ import com.vezhny.eventtracker.R
 import com.vezhny.eventtracker.data.EventWithLast
 import com.vezhny.eventtracker.ui.EmptyState
 import com.vezhny.eventtracker.ui.formatLastOccurred
+import com.vezhny.eventtracker.ui.icons.EventIcon
 import com.vezhny.eventtracker.ui.settings.SettingsDialog
 import com.vezhny.eventtracker.ui.settings.SettingsViewModel
 import org.koin.androidx.compose.koinViewModel
@@ -140,6 +142,9 @@ fun HomeScreen(
     }
 }
 
+// Fits an icon, a name and the last occurrence, so tiles with and without an icon line up in a row.
+private val TileMinHeight = 112.dp
+
 @Composable
 private fun EventTile(item: EventWithLast, onClick: () -> Unit) {
     Card(
@@ -148,13 +153,14 @@ private fun EventTile(item: EventWithLast, onClick: () -> Unit) {
             containerColor = MaterialTheme.colorScheme.primaryContainer,
             contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
         ),
-        modifier = Modifier.fillMaxWidth().heightIn(min = 96.dp),
+        modifier = Modifier.fillMaxWidth().heightIn(min = TileMinHeight),
     ) {
         Column(
-            modifier = Modifier.fillMaxWidth().heightIn(min = 96.dp).padding(12.dp),
+            modifier = Modifier.fillMaxWidth().heightIn(min = TileMinHeight).padding(12.dp),
             verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterVertically),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
+            EventIcon.fromKey(item.event.icon)?.let { Icon(it.vector, contentDescription = null, modifier = Modifier.size(32.dp)) }
             Text(
                 item.event.name,
                 style = MaterialTheme.typography.titleMedium,

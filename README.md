@@ -9,8 +9,8 @@ A small Android app for marking things that happened to you.
 
 ## Features
 
-- **Home.** All your events as a grid of tiles, each showing when the event last happened ("Today, 14:30", "5 days ago", "Never"). Tap a tile, confirm, and the event is recorded with the current time. A mistaken record can be undone from the snackbar.
-- **Events.** Add, edit, and delete events with a name and a note. Deleting asks for confirmation and also removes the event's records.
+- **Home.** All your events as a grid of tiles with their icons, each showing when the event last happened ("Today, 14:30", "5 days ago", "Never"). Tap a tile, confirm, and the event is recorded with the current time. A mistaken record can be undone from the snackbar.
+- **Events.** Add, edit, and delete events with a name, a note, and an optional icon from a built-in set of 28. Deleting asks for confirmation and also removes the event's records.
 - **Statistics.** How many times each event happened over the last week, month, or year (each ending today), or over any range of days picked in a calendar. Events are listed most frequent first, with bars relative to the leader.
 - **Import / export.** Export either the event list or everything (events plus history) to a JSON file through the system file picker, and import it back on any device. Existing events and records are never duplicated.
 - **Theme.** Light, dark, or system default.
@@ -41,6 +41,7 @@ app/src/main/java/com/vezhny/eventtracker/
 └── ui/          Compose screens and ViewModels
     ├── home/       Tile grid and recording
     ├── events/     Event list and edit form, import/export
+    ├── icons/      Event icon set
     ├── stats/      Statistics by period
     ├── settings/   Theme and language dialog
     └── theme/      Color schemes
@@ -50,7 +51,7 @@ app/src/main/java/com/vezhny/eventtracker/
 
 Two tables:
 
-- `event`: `id`, `name`, `note`.
+- `event`: `id`, `name`, `note`, `icon` (a stable key such as `coffee`, null for no icon; added in database version 2 by a Room auto-migration).
 - `event_record`: `id`, `eventId`, `occurredAt` (epoch millis). Rows are deleted together with their event.
 
 ## Getting started
@@ -66,12 +67,12 @@ Requirements: Android Studio (or JDK 17+ and the Android SDK with platform 37).
 ```bash
 ./gradlew test             # unit tests (Robolectric for Android APIs)
 ./gradlew lint             # Android lint
-./gradlew assembleDebug    # debug APK in app/build/outputs/apk/debug/
+./gradlew assembleDebug    # app/build/outputs/apk/debug/event-tracker-<version>-debug.apk
 ```
 
 ## Continuous integration
 
-[GitHub Actions](.github/workflows/android.yml) runs `./gradlew lint test assembleDebug` on every push and pull request. Lint and test reports are uploaded as build artifacts.
+[GitHub Actions](.github/workflows/android.yml) runs `./gradlew lint test assembleDebug` on every pull request. Lint and test reports are uploaded as build artifacts.
 
 ## Versioning
 
@@ -93,7 +94,7 @@ There are two kinds of export, both in the same format:
 {
   "version": 1,
   "events": [
-    { "name": "Running", "note": "5 km in the park" },
+    { "name": "Running", "note": "5 km in the park", "icon": "run" },
     { "name": "Coffee" }
   ],
   "history": [
@@ -103,7 +104,7 @@ There are two kinds of export, both in the same format:
 ```
 
 - `history` is present only in a full export. Entries reference events by name, so the file is portable between devices. `occurredAt` is an ISO-8601 instant in UTC.
-- `note` is optional, and unknown fields are ignored. Events with a blank name are skipped.
+- `note` and `icon` are optional, and unknown fields are ignored. `icon` is a stable icon key such as `coffee` or `run`; a key the app doesn't know is kept, and the event shows no icon. Events with a blank name are skipped.
 - Files with a newer `version` than the app supports are rejected.
 
 Import loads everything the file contains, in a single transaction:

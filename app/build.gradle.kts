@@ -20,6 +20,11 @@ val appVersionCode: Int = run {
     major * 10_000 + minor * 100 + patch
 }
 
+// APK name: event-tracker-<version>-<build type>.apk instead of app-<build type>.apk.
+base {
+    archivesName = "event-tracker-$appVersion"
+}
+
 android {
     namespace = "com.vezhny.eventtracker"
     compileSdk = 37

@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
@@ -87,7 +89,8 @@ fun EventEditScreen(
         },
     ) { padding ->
         Column(
-            modifier = Modifier.padding(padding).padding(16.dp),
+            // Scrolls: the icon grid does not fit on small screens together with the keyboard.
+            modifier = Modifier.padding(padding).verticalScroll(rememberScrollState()).padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             OutlinedTextField(
@@ -104,6 +107,12 @@ fun EventEditScreen(
                 minLines = 3,
                 modifier = Modifier.fillMaxWidth(),
             )
+            Text(
+                stringResource(R.string.event_icon),
+                style = MaterialTheme.typography.titleSmall,
+                color = MaterialTheme.colorScheme.primary,
+            )
+            IconPicker(selected = state.icon, onSelect = viewModel::onIconChange, modifier = Modifier.fillMaxWidth())
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
                 Button(onClick = { viewModel.save() }, enabled = state.canSave) { Text(stringResource(R.string.save)) }
             }

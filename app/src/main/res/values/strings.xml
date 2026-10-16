@@ -42,6 +42,7 @@
     <string name="event_edit">Event</string>
     <string name="event_name">Name</string>
     <string name="event_note">Note</string>
+    <string name="event_icon">Icon</string>
     <string name="delete_event_title">Delete event?</string>
     <string name="delete_event_text">“%1$s” and all its records will be deleted.</string>
 
@@ -70,6 +71,37 @@
     <string name="stats_total">Total: %1$d</string>
     <string name="stats_empty_title">No statistics yet</string>
     <string name="stats_empty_text">Add events and mark them on the home screen to see how often they happen.</string>
+
+    <!-- Event icons -->
+    <string name="icon_none">No icon</string>
+    <string name="icon_coffee">Coffee</string>
+    <string name="icon_food">Food</string>
+    <string name="icon_water">Water</string>
+    <string name="icon_alcohol">Alcohol</string>
+    <string name="icon_smoking">Smoking</string>
+    <string name="icon_run">Running</string>
+    <string name="icon_gym">Gym</string>
+    <string name="icon_sleep">Sleep</string>
+    <string name="icon_health">Health</string>
+    <string name="icon_heart">Heart</string>
+    <string name="icon_celebration">Celebration</string>
+    <string name="icon_shopping">Shopping</string>
+    <string name="icon_money">Money</string>
+    <string name="icon_work">Work</string>
+    <string name="icon_home">Home</string>
+    <string name="icon_car">Car</string>
+    <string name="icon_fuel">Fuel</string>
+    <string name="icon_flight">Flight</string>
+    <string name="icon_haircut">Haircut</string>
+    <string name="icon_stress">Stress</string>
+    <string name="icon_toilet">Toilet</string>
+    <string name="icon_computer">Computer</string>
+    <string name="icon_games">Games</string>
+    <string name="icon_star">Star</string>
+    <string name="icon_check">Check mark</string>
+    <string name="icon_flag">Flag</string>
+    <string name="icon_bolt">Lightning</string>
+    <string name="icon_bell">Bell</string>
 
     <!-- Settings -->
     <string name="settings">Settings</string>

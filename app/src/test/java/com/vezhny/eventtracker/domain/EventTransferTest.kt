@@ -19,6 +19,24 @@ class EventTransferTest {
     }
 
     @Test
+    fun `icon round trips and is optional`() {
+        val events = listOf(Event(name = "Кофе", icon = "coffee"), Event(name = "Пробежка"))
+
+        val text = EventTransfer.encode(events)
+
+        assertEquals(events, EventTransfer.decode(text).events)
+        assertEquals(1, Regex(""""icon""").findAll(text).count())
+    }
+
+    @Test
+    fun `unknown and blank icons are read as given or dropped`() {
+        val decoded = EventTransfer.decode(
+            """{"version": 1, "events": [{"name": "Кофе", "icon": " unicorn "}, {"name": "Чай", "icon": " "}]}""",
+        )
+        assertEquals(listOf(Event(name = "Кофе", icon = "unicorn"), Event(name = "Чай")), decoded.events)
+    }
+
+    @Test
     fun `events-only file has no history key`() {
         assertFalse(EventTransfer.encode(listOf(Event(name = "Кофе"))).contains("history"))
     }
