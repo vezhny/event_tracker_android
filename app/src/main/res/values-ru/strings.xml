@@ -1,10 +1,78 @@
 <resources>
+    <!-- Navigation -->
+    <string name="nav_home">Главная</string>
+    <string name="nav_events">События</string>
+    <string name="nav_stats">Статистика</string>
+
     <!-- Common -->
     <string name="done">Готово</string>
+    <string name="save">Сохранить</string>
+    <string name="cancel">Отмена</string>
+    <string name="delete">Удалить</string>
+    <string name="edit">Изменить</string>
+    <string name="back">Назад</string>
+    <string name="add_event">Добавить событие</string>
+
+    <!-- Events -->
+    <string name="events_list_empty_title">Список событий пуст</string>
+    <string name="events_list_empty_text">Добавьте события, которые хотите отмечать.</string>
+    <string name="more">Ещё</string>
+    <string name="export_events">Экспорт событий</string>
+    <string name="export_everything">Экспорт всего (с историей)</string>
+    <string name="import_from_file">Импорт из файла</string>
+    <plurals name="export_done">
+        <item quantity="one">Выгружено %d событие</item>
+        <item quantity="few">Выгружено %d события</item>
+        <item quantity="many">Выгружено %d событий</item>
+        <item quantity="other">Выгружено %d события</item>
+    </plurals>
+    <plurals name="import_added">
+        <item quantity="one">Добавлено %d событие</item>
+        <item quantity="few">Добавлено %d события</item>
+        <item quantity="many">Добавлено %d событий</item>
+        <item quantity="other">Добавлено %d события</item>
+    </plurals>
+    <string name="import_added_with_skipped">%1$s, уже были в списке: %2$d</string>
+    <string name="import_history_added">%1$s, добавлено записей: %2$d</string>
+    <string name="export_done_with_history">%1$s, записей: %2$d</string>
+    <string name="export_failed">Не удалось сохранить файл</string>
+    <string name="import_read_failed">Не удалось прочитать файл</string>
+    <string name="import_invalid">Это не файл Event Tracker</string>
+
+    <!-- Event edit -->
+    <string name="event_new">Новое событие</string>
+    <string name="event_edit">Событие</string>
+    <string name="event_name">Название</string>
+    <string name="event_note">Заметка</string>
+    <string name="delete_event_title">Удалить событие?</string>
+    <string name="delete_event_text">«%1$s» и все его записи будут удалены.</string>
 
     <!-- Home -->
-    <string name="events_empty_title">Событий пока нет</string>
-    <string name="events_empty_text">Здесь появятся события, которые вы отслеживаете.</string>
+    <string name="home_empty_title">Пока нечего отмечать</string>
+    <string name="home_empty_text">Добавьте события, которые хотите отмечать, и они появятся здесь плитками.</string>
+    <string name="confirm_record">Это произошло сейчас?</string>
+    <string name="recorded">Записано: %1$s</string>
+    <string name="undo">Отменить</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="last_never">Ещё не было</string>
+    <string name="last_today">Сегодня, %1$s</string>
+    <string name="last_yesterday">Вчера, %1$s</string>
+    <plurals name="last_days_ago">
+        <item quantity="one">%d день назад</item>
+        <item quantity="few">%d дня назад</item>
+        <item quantity="many">%d дней назад</item>
+        <item quantity="other">%d дня назад</item>
+    </plurals>
+
+    <!-- Statistics -->
+    <string name="period_week">Неделя</string>
+    <string name="period_month">Месяц</string>
+    <string name="period_year">Год</string>
+    <string name="period_custom">Период…</string>
+    <string name="stats_total">Всего: %1$d</string>
+    <string name="stats_empty_title">Статистики пока нет</string>
+    <string name="stats_empty_text">Добавьте события и отмечайте их на главной, чтобы видеть, как часто они происходят.</string>
 
     <!-- Settings -->
     <string name="settings">Настройки</string>

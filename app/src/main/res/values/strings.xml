@@ -1,12 +1,75 @@
 <resources>
     <string name="app_name" translatable="false">Event Tracker</string>
 
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_events">Events</string>
+    <string name="nav_stats">Statistics</string>
+
     <!-- Common -->
     <string name="done">Done</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="back">Back</string>
+    <string name="add_event">Add event</string>
+
+    <!-- Events -->
+    <string name="events_list_empty_title">Your event list is empty</string>
+    <string name="events_list_empty_text">Add the events you want to track.</string>
+    <string name="more">More</string>
+    <string name="export_events">Export events</string>
+    <string name="export_everything">Export everything (with history)</string>
+    <string name="import_from_file">Import from file</string>
+    <plurals name="export_done">
+        <item quantity="one">Exported %d event</item>
+        <item quantity="other">Exported %d events</item>
+    </plurals>
+    <plurals name="import_added">
+        <item quantity="one">Added %d event</item>
+        <item quantity="other">Added %d events</item>
+    </plurals>
+    <string name="import_added_with_skipped">%1$s, already in the list: %2$d</string>
+    <string name="import_history_added">%1$s, records added: %2$d</string>
+    <string name="export_done_with_history">%1$s, records: %2$d</string>
+    <string name="export_failed">Couldn’t save the file</string>
+    <string name="import_read_failed">Couldn’t read the file</string>
+    <string name="import_invalid">This isn’t an Event Tracker file</string>
+
+    <!-- Event edit -->
+    <string name="event_new">New event</string>
+    <string name="event_edit">Event</string>
+    <string name="event_name">Name</string>
+    <string name="event_note">Note</string>
+    <string name="delete_event_title">Delete event?</string>
+    <string name="delete_event_text">“%1$s” and all its records will be deleted.</string>
 
     <!-- Home -->
-    <string name="events_empty_title">No events yet</string>
-    <string name="events_empty_text">Events you track will show up here.</string>
+    <string name="home_empty_title">Nothing to mark yet</string>
+    <string name="home_empty_text">Add the events you want to track and they will show up here as tiles.</string>
+    <string name="confirm_record">Did it happen just now?</string>
+    <string name="recorded">Recorded: %1$s</string>
+    <string name="undo">Undo</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="last_never">Never</string>
+    <string name="last_today">Today, %1$s</string>
+    <string name="last_yesterday">Yesterday, %1$s</string>
+    <plurals name="last_days_ago">
+        <item quantity="one">%d day ago</item>
+        <item quantity="other">%d days ago</item>
+    </plurals>
+
+    <!-- Statistics -->
+    <string name="period_week">Week</string>
+    <string name="period_month">Month</string>
+    <string name="period_year">Year</string>
+    <string name="period_custom">Period…</string>
+    <string name="stats_range" translatable="false">%1$s – %2$s</string>
+    <string name="stats_total">Total: %1$d</string>
+    <string name="stats_empty_title">No statistics yet</string>
+    <string name="stats_empty_text">Add events and mark them on the home screen to see how often they happen.</string>
 
     <!-- Settings -->
     <string name="settings">Settings</string>
