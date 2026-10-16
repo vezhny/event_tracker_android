@@ -1,6 +1,28 @@
 <resources>
+    <!-- Navigation -->
+    <string name="nav_home">Главная</string>
+    <string name="nav_events">События</string>
+
     <!-- Common -->
     <string name="done">Готово</string>
+    <string name="save">Сохранить</string>
+    <string name="cancel">Отмена</string>
+    <string name="delete">Удалить</string>
+    <string name="edit">Изменить</string>
+    <string name="back">Назад</string>
+    <string name="add_event">Добавить событие</string>
+
+    <!-- Events -->
+    <string name="events_list_empty_title">Список событий пуст</string>
+    <string name="events_list_empty_text">Добавьте события, которые хотите отмечать.</string>
+
+    <!-- Event edit -->
+    <string name="event_new">Новое событие</string>
+    <string name="event_edit">Событие</string>
+    <string name="event_name">Название</string>
+    <string name="event_note">Заметка</string>
+    <string name="delete_event_title">Удалить событие?</string>
+    <string name="delete_event_text">«%1$s» и все его записи будут удалены.</string>
 
     <!-- Home -->
     <string name="events_empty_title">Событий пока нет</string>

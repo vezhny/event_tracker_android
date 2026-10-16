@@ -1,8 +1,30 @@
 <resources>
     <string name="app_name" translatable="false">Event Tracker</string>
 
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_events">Events</string>
+
     <!-- Common -->
     <string name="done">Done</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="back">Back</string>
+    <string name="add_event">Add event</string>
+
+    <!-- Events -->
+    <string name="events_list_empty_title">Your event list is empty</string>
+    <string name="events_list_empty_text">Add the events you want to track.</string>
+
+    <!-- Event edit -->
+    <string name="event_new">New event</string>
+    <string name="event_edit">Event</string>
+    <string name="event_name">Name</string>
+    <string name="event_note">Note</string>
+    <string name="delete_event_title">Delete event?</string>
+    <string name="delete_event_text">“%1$s” and all its records will be deleted.</string>
 
     <!-- Home -->
     <string name="events_empty_title">No events yet</string>

@@ -1,5 +1,6 @@
 package com.vezhny.eventtracker.ui.home
 
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
@@ -42,9 +43,12 @@ fun HomeScreen(settingsViewModel: SettingsViewModel = koinViewModel()) {
     }
 
     Scaffold(
+        // The app-level Scaffold already applies system bar insets.
+        contentWindowInsets = WindowInsets(0, 0, 0, 0),
         topBar = {
             TopAppBar(
                 title = { Text(stringResource(R.string.app_name)) },
+                windowInsets = WindowInsets(0, 0, 0, 0),
                 actions = {
                     IconButton(onClick = { settingsOpen = true }) {
                         Icon(Icons.Filled.Settings, contentDescription = stringResource(R.string.settings))
