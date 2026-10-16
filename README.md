@@ -67,7 +67,7 @@ Requirements: Android Studio (or JDK 17+ and the Android SDK with platform 37).
 ```bash
 ./gradlew test             # unit tests (Robolectric for Android APIs)
 ./gradlew lint             # Android lint
-./gradlew assembleDebug    # debug APK in app/build/outputs/apk/debug/
+./gradlew assembleDebug    # app/build/outputs/apk/debug/event-tracker-<version>-debug.apk
 ```
 
 ## Continuous integration
