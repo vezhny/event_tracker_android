@@ -6,6 +6,7 @@ import com.vezhny.eventtracker.data.EventRepository
 import com.vezhny.eventtracker.data.SettingsRepository
 import com.vezhny.eventtracker.ui.events.EventEditViewModel
 import com.vezhny.eventtracker.ui.events.EventsViewModel
+import com.vezhny.eventtracker.ui.home.HomeViewModel
 import com.vezhny.eventtracker.ui.settings.SettingsViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.module.dsl.viewModel
@@ -21,6 +22,7 @@ val appModule = module {
     }
 
     viewModel { SettingsViewModel(get()) }
+    viewModel { HomeViewModel(get()) }
     viewModel { EventsViewModel(get()) }
     viewModel { params -> EventEditViewModel(params.get(), get()) }
 }

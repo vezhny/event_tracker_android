@@ -27,8 +27,13 @@
     <string name="delete_event_text">“%1$s” and all its records will be deleted.</string>
 
     <!-- Home -->
-    <string name="events_empty_title">No events yet</string>
-    <string name="events_empty_text">Events you track will show up here.</string>
+    <string name="home_empty_title">Nothing to mark yet</string>
+    <string name="home_empty_text">Add the events you want to track and they will show up here as tiles.</string>
+    <string name="confirm_record">Did it happen just now?</string>
+    <string name="recorded">Recorded: %1$s</string>
+    <string name="undo">Undo</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
     <!-- Settings -->
     <string name="settings">Settings</string>

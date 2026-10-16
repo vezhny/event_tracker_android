@@ -80,7 +80,9 @@ fun EventTrackerApp() {
             startDestination = HomeRoute,
             modifier = Modifier.padding(padding),
         ) {
-            composable<HomeRoute> { HomeScreen() }
+            composable<HomeRoute> {
+                HomeScreen(onAddEvent = { navController.navigate(EventEditRoute()) })
+            }
             composable<EventsRoute> {
                 EventsScreen(onEditEvent = { id -> navController.navigate(EventEditRoute(id)) })
             }

@@ -25,8 +25,13 @@
     <string name="delete_event_text">«%1$s» и все его записи будут удалены.</string>
 
     <!-- Home -->
-    <string name="events_empty_title">Событий пока нет</string>
-    <string name="events_empty_text">Здесь появятся события, которые вы отслеживаете.</string>
+    <string name="home_empty_title">Пока нечего отмечать</string>
+    <string name="home_empty_text">Добавьте события, которые хотите отмечать, и они появятся здесь плитками.</string>
+    <string name="confirm_record">Это произошло сейчас?</string>
+    <string name="recorded">Записано: %1$s</string>
+    <string name="undo">Отменить</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
 
     <!-- Settings -->
     <string name="settings">Настройки</string>
