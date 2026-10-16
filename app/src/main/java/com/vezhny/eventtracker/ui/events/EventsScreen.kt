@@ -4,9 +4,11 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -40,9 +42,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.vezhny.eventtracker.R
 import com.vezhny.eventtracker.ui.EmptyState
+import com.vezhny.eventtracker.ui.icons.EventIcon
 import org.koin.androidx.compose.koinViewModel
 
 @Suppress("DEPRECATION") // Icons.Filled.List: AutoMirrored variant lives in material-icons-extended.
@@ -138,21 +142,28 @@ fun EventsScreen(
                     Button(onClick = { onEditEvent(0) }) { Text(stringResource(R.string.add_event)) }
                     TextButton(onClick = { importLauncher.launch(importMimeTypes) }) { Text(stringResource(R.string.import_from_file)) }
                 }
-                else -> LazyColumn(Modifier.fillMaxSize()) {
-                    items(list, key = { it.id }) { event ->
-                        ListItem(
-                            headlineContent = { Text(event.name) },
-                            supportingContent = event.note?.takeIf { it.isNotBlank() }?.let { note ->
-                                { Text(note, maxLines = 2, overflow = TextOverflow.Ellipsis) }
-                            },
-                            trailingContent = {
-                                IconButton(onClick = { onEditEvent(event.id) }) {
-                                    Icon(Icons.Filled.Edit, contentDescription = stringResource(R.string.edit))
-                                }
-                            },
-                            modifier = Modifier.clickable { onEditEvent(event.id) },
-                        )
-                        HorizontalDivider()
+                else -> {
+                    // Keeps names aligned when only some events have an icon.
+                    val anyIcon = list.any { EventIcon.fromKey(it.icon) != null }
+                    LazyColumn(Modifier.fillMaxSize()) {
+                        items(list, key = { it.id }) { event ->
+                            ListItem(
+                                headlineContent = { Text(event.name) },
+                                leadingContent = if (!anyIcon) null else {
+                                    { EventIcon.fromKey(event.icon)?.let { Icon(it.vector, contentDescription = null) } ?: Spacer(Modifier.size(24.dp)) }
+                                },
+                                supportingContent = event.note?.takeIf { it.isNotBlank() }?.let { note ->
+                                    { Text(note, maxLines = 2, overflow = TextOverflow.Ellipsis) }
+                                },
+                                trailingContent = {
+                                    IconButton(onClick = { onEditEvent(event.id) }) {
+                                        Icon(Icons.Filled.Edit, contentDescription = stringResource(R.string.edit))
+                                    }
+                                },
+                                modifier = Modifier.clickable { onEditEvent(event.id) },
+                            )
+                            HorizontalDivider()
+                        }
                     }
                 }
             }

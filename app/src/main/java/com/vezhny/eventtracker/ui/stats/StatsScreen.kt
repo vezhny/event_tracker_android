@@ -6,10 +6,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -17,6 +20,7 @@ import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.DateRangePicker
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
+import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -41,6 +45,7 @@ import com.vezhny.eventtracker.domain.DateRange
 import com.vezhny.eventtracker.domain.StatsPeriod
 import com.vezhny.eventtracker.ui.EmptyState
 import com.vezhny.eventtracker.ui.formatDate
+import com.vezhny.eventtracker.ui.icons.EventIcon
 import org.koin.androidx.compose.koinViewModel
 import java.time.LocalDate
 
@@ -112,12 +117,14 @@ fun StatsScreen(viewModel: StatsViewModel = koinViewModel()) {
                     style = MaterialTheme.typography.titleMedium,
                     modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
                 )
+                // Keeps names aligned when only some events have an icon.
+                val anyIcon = s.counts.any { EventIcon.fromKey(it.event.icon) != null }
                 LazyColumn(
                     contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp),
                     modifier = Modifier.fillMaxSize(),
                 ) {
-                    items(s.counts, key = { it.event.id }) { item -> CountRow(item, s.maxCount) }
+                    items(s.counts, key = { it.event.id }) { item -> CountRow(item, s.maxCount, anyIcon) }
                 }
             }
         }
@@ -125,9 +132,15 @@ fun StatsScreen(viewModel: StatsViewModel = koinViewModel()) {
 }
 
 @Composable
-private fun CountRow(item: EventCount, maxCount: Int) {
+private fun CountRow(item: EventCount, maxCount: Int, anyIcon: Boolean) {
     Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
         Row(verticalAlignment = Alignment.CenterVertically) {
+            val icon = EventIcon.fromKey(item.event.icon)
+            if (icon != null) {
+                Icon(icon.vector, contentDescription = null, modifier = Modifier.padding(end = 12.dp).size(20.dp))
+            } else if (anyIcon) {
+                Spacer(Modifier.width(32.dp))
+            }
             Text(item.event.name, style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f))
             Text(item.count.toString(), style = MaterialTheme.typography.titleMedium)
         }
